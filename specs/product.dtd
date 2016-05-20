@@ -1,0 +1,7 @@
+<!DOCTYPE product [ 
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT main_image (#PCDATA)>
+<!ELEMENT offer (price, currency)>
+<!ELEMENT additional_image (#PCDATA)>
+]>

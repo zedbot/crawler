@@ -1,0 +1,25 @@
+{
+  Product: {
+    properties: {
+      additionalType:{
+        type:"string"
+      },
+      alternateName:{
+        type:"string"
+      },
+      description:{
+        type:"string"
+      },
+      image:{
+        type:"string"
+      },
+      name:{
+        type:"string"
+      },
+      url:{
+        type:"string"
+      },
+      
+    }
+  }
+}

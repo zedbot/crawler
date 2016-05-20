@@ -1,0 +1,66 @@
+jsdom = require('jsdom');
+//require("node-jquery-xhr")
+XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
+
+function scraper() {
+
+}
+
+scraper.scrape = function(url, headers, type, callback) {
+  jsdom.env({
+      url: url,
+	  headers: headers,
+      features: {
+          FetchExternalResources   : [],
+          ProcessExternalResources : [],
+        MutationEvents           : '2.0'
+      },
+    scripts: ["http://crawler.zed.ee/scraper.js"],
+    done: function (errors, window) {
+      jsdom.getVirtualConsole(window).sendTo(console);
+      window.XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+      window.zedBotReady = function() {
+        var product = window.zedBot.parse();
+       // console.log(JSON.stringify(product, null, ' '));
+        callback(product);
+      }
+      console.log('errors:', errors);
+      $ = require("jquery")(window);
+      $.support.cors = true;
+      $.ajaxSettings.xhr = function () {return new XMLHttpRequest;};
+      
+      window.zedBot.init(type, 'node-js', $);
+    }
+  });
+}
+
+module.exports=scraper
+//scrape(process.argv[2]);
+/*
+var doc  = jsdom.jsdom(process.argv[2], {
+          features: {
+            FetchExternalResources   : ['script'],
+            ProcessExternalResources : ['script'],
+            MutationEvents           : '2.0',
+        }
+    });
+var window = doc.defaultView;
+jsdom.getVirtualConsole(window).sendTo(console);
+
+
+window.zedBotReady = function() {
+	console.log('zedBot:', window.zedBot.parse());
+}
+var s=window.document.createElement('script');
+s.id='zedbot_scraper';
+s.setAttribute('data-classifier','product');
+s.setAttribute('data-mode','node-js');
+s.setAttribute('src','http://crawler.zed.ee/scraper.js?'+new Date().getTime());
+s.onload = function(){
+	console.log('errors:', this.errors);
+};
+window.document.getElementsByTagName('head')[0].appendChild(s);
+
+console.log(2);
+
+*/

@@ -1,0 +1,26 @@
+{
+  "canonical":"",
+  "url":"",
+  "enabled":null,
+  "parent_selector":"",
+  "children": {
+    "link": {
+      "selector": "",
+      "options": {
+        "create_children": {
+          "title":{},
+          "href": {
+            "use_attribute": "href"
+          }
+        }
+      }
+    },
+    "pagination": {
+      "selector": "",
+      "options": {
+          "use_attribute": "href"
+      }
+    }
+ 
+  }
+}
